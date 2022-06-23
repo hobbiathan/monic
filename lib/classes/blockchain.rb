@@ -1,8 +1,9 @@
 class Blockchain
-  attr_reader :chain
+  attr_reader :chain, :difficulty
 
   def initialize()
     @chain = [self.create_genesis_block]
+    @difficulty = 5
   end 
 
   def create_genesis_block
@@ -15,8 +16,7 @@ class Blockchain
 
   def add_block(block) 
     block.uprevious(self.get_latest_block.hash)
-    block.hash = block.calculate_hash
-
+    block.mine_block(self.difficulty)
     self.chain.push(block)
   end 
 
