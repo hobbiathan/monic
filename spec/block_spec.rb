@@ -18,7 +18,8 @@ RSpec.describe "Block" do
   end
 
   it 'calculates hash' do
-    expect(@block.hash).to eq(@block.calculate_hash)
+    @block.calculate_hash
+    expect(@block.hash).to eq(@block.hash)
   end 
 
   # These exist for validity checking in the blockchain class - they should, however, not exist within a genuine blockchain, since you're not supposed to modify these things
@@ -31,6 +32,13 @@ RSpec.describe "Block" do
     it 'can change previous data' do
       @block.udata({amount: 300000})
       expect(@block.data).to eq({amount: 300000})
+    end 
+
+    it 'can mine block' do
+      prev_hash = @block.hash
+      @block.mine_block(3)
+      expect(@block.hash).to_not eq(prev_hash)
+      expect(@block.hash[0..2]).to eq("000")
     end 
   end 
 end 
