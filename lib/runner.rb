@@ -1,16 +1,17 @@
 require 'pry'
+require 'time'
 
 require './classes/block'
 require './classes/blockchain'
 
 
-monic = Blockchain.new
-monic.add_block(Block.new(1, "06/23/2022", { amount: 17 } ))
-monic.add_block(Block.new(2, "06/23/2022", { amount: 20 } )) 
+@monic = Blockchain.new
 
-# binding.pry
+@x = 1
+@y = 100
 
-monic.chain[1].udata({amount: 4000})
-monic.chain[1].hash = monic.chain[1].calculate_hash
-
-# binding.pry
+until @x == @y do
+  @monic.add_block(Block.new(@x, Time.now.to_s[0..9], { amount: srand(1000) } ))
+  @x += 1
+  sleep(0.5)
+end
