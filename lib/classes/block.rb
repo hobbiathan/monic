@@ -2,20 +2,19 @@ require 'digest'
 require 'json'
 
 class Block
-  attr_reader :index, :timestamp, :data, :previousHash
+  attr_reader :timestamp, :data, :previousHash, :transactions
   attr_accessor :hash, :nonce 
 
-  def initialize(index, timestamp, data, previousHash = '')
-    @index = index
+  def initialize(timestamp, transactions, previousHash = '')
     @timestamp = timestamp
-    @data = data
+    @transactions = transactions
     @previousHash = previousHash 
     @hash = self.calculate_hash
     @nonce = 0
   end 
 
   def calculate_hash
-    Digest::SHA256.hexdigest(self.index.to_s + self.timestamp + self.previousHash.to_s + JSON.generate(self.data).to_s + self.nonce.to_s).to_s
+    Digest::SHA256.hexdigest(self.timestamp.to_s + self.previousHash.to_s + JSON.generate(self.transactions.to_s).to_s + self.nonce.to_s).to_s
   end 
 
   def mine_block(difficulty)
