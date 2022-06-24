@@ -2,6 +2,8 @@
 
 Not necessarly an actual crypto, or even remotely functioning under any capacity, but just something to play around with to understand blockchain technology a tad bit better
 
+A Ruby implementation based on Savjee's (SavjeeCoin)[https://github.com/Savjee/SavjeeCoin]
+
 ## Setup
 
 Really, after cloning this down into the directory of your choosing, just run 
